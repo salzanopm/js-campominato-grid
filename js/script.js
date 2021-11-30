@@ -52,7 +52,7 @@ function startGame() {
 // -----------
 // FUNZIONI LEGATE AL DOM
 // -----------
-function handleSquareClick() {
+function handleCellClick() {
     this.classList.add('clicked');
 }
 
