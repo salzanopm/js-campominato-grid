@@ -4,38 +4,45 @@
 
 // Ogni volta che clicco su un quadrato questo si colora di 
 // verde se il numero contenuto e pari e in rosso se dispari.
-document.getElementById('play').addEventListener('click', startGame);
+const playButton = document.getElementById('play-button')
+playButton.addEventListener('click',startGame);
 
 function startGame() {
     // CREARE LA GRIGLIA CON GLI SQUARE
-    // Crearmi un array di numeri casuali e non ripetuti da 1 a 64
-    let numberOfSquares= 0;
-    const numberOfSquaresEasy = 100;
-    const numberOfSquaresHard = 81;
-    const numberOfSquaresCrazy = 49;
-    if (document.getElementById("mode-select").selectedIndex = 0) {
-        numberOfSquares === numberOfSquaresEasy;
-    } else if (document.getElementById("mode-select").selectedIndex = 1) {
-        numberOfSquares === numberOfSquaresHard;
-    } else {
-        numberOfSquares === numberOfSquaresCrazy;
-    }
-    // cambio valore in base a difficoltà
 
-    let generatedNumbers = generateSquaresNumbers(numberOfSquares);
+    // h2 con hidden
+    const introText = document.getElementById('intro-text');
+    introText.classList.add('hidden');
 
     // Per ogni numero nell'array, creo una cella e la appendo al grid container
     const mainGrid = document.getElementById('grid');
+    mainGrid.classList.remove('hidden');
     mainGrid.innerHTML = '';
-    for(let i = 0; i < generatedNumbers.length; i++) {
-        const thisNumber = generatedNumbers[i];
-        const newGeneratedSquare = generateGridItem(thisNumber);
+
+    // verifico e memorizzo cosa ha scelto l'utente
+    const levelSelect = parseInt(document.getElementById('select-level').value);
+    let maxGridNumber;
+    let gridItemDimension;
+    if(levelSelect === 1) {
+        maxGridNumber = 100;
+        gridItemDimension = 10;
+    } else if ( levelSelect === 2 ) {
+        maxGridNumber = 81;
+        gridItemDimension = 9;
+    } else if ( levelSelect === 3 ) {
+        maxGridNumber = 49;
+        gridItemDimension = 7;
+    }
+
+    for(let i = 0; i < maxGridNumber; i++) {
+       
+        const newGeneratedCell = generateGridItem(i,gridItemDimension);
 
         // Attacco l'evento allo square
-        newGeneratedSquare.addEventListener('click', handleSquareClick);
+        newGeneratedCell.addEventListener('click', handleCellClick);
         
         // Aggiungo l'elemento alla griglia
-        mainGrid.appendChild(newGeneratedSquare);
+        mainGrid.appendChild(newGeneratedCell);
     }
 }
 
@@ -46,14 +53,10 @@ function startGame() {
 // FUNZIONI LEGATE AL DOM
 // -----------
 function handleSquareClick() {
-    this.classList.add('active');
-    const thisSquareNumber = parseInt( this.querySelector('span').textContent );
-
-    
-        this.classList.add('square--selected');
-    
+    this.classList.add('clicked');
 }
 
+  
 // -----------
 // FUNCTIONS
 // -----------
@@ -62,44 +65,14 @@ function handleSquareClick() {
 // number -> numero da inserire nello square
 // 
 // return: Torna l'elemento html creato
-function generateGridItem(number) {
-    const newSquare = document.createElement('div');
-    if (Option === 'Easy') {
-        newSquare.classList.add('square');
-        newSquare.classList.add('square-easy');
-    } else if (Option === 'Hard') {
-        newSquare.classList.add('square');
-        newSquare.classList.add('square-hard');
-    } else {
-        newSquare.classList.add('square');
-        newSquare.classList.add('square-crazy');
-    }
-    
-    
-    newSquare.innerHTML = `<span>${number}</span>`; 
+function generateGridItem(innerNumber, cellDimension) {
+    const newCell = document.createElement('div');
+    newCell.classList.add('square');
+    newCell.innerHTML = `<span>${innerNumber}</span>`; 
 
-    return newSquare;
+    newCell.style.width = `calc(100% / ${cellDimension})`;
+    newCell.style.height = `calc(100% / ${cellDimension})`;
+    return newCell;
 }
 
-// Genera un array con x numeri unici
-// quantityOfNumbers -> quanti numeri deve generare
 // 
-// return: array di quantityOfNumbers numeri univoci
-function generateSquaresNumbers (quantityOfNumbers) {
-    const numbersArray = [];
-    while(numbersArray.length < quantityOfNumbers) {
-        // Un numero random
-        const randomNumber = getRndInteger(1, quantityOfNumbers);
-
-        // Se il numero random non è gia presente in numbersArray lo pusho
-        if( !numbersArray.includes(randomNumber) ) {
-            numbersArray.push(randomNumber);
-        }
-    }
-
-    return numbersArray;
-}
-
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}

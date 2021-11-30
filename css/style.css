@@ -6,96 +6,84 @@
 }
 
 /* COMMON */
+.container {
+    width: 80%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .app-wrapper {
     width: 100%;
     height: 100vh;
-    
-}
-.inline {
-    display: inline-block;
-    height: 100%;
 }
 
 /* HEADER */
 header {
     height: 100px;
+}
+.header-left {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px; 
+    height: 100%;
+    align-items: center;
+}
+.header-left .logo {
+    height: 70px;
+}
+.header-left span {
+    margin-left: 20px;
+    font-size: 40px;
 }
 
-.logo-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;  
+.header-right select {
+    min-width: 200px;
 }
-
-.menu {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center; 
-}
-h1 {
-    display: inline-block;
-    font-size: 30px;  
+.header-right select,
+.header-right button {
+    padding: 5px;
 }
 
 /* MAIN */
 main {
     height: calc(100% - 150px);
-    background-color: #7fffd4;
+    background-color: aquamarine;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-/* Game grid */
-.game-grid {
-    width: 350px;
-    height: 350px;
-    border: 2px solid white;
+.main-grid {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
-.square-easy {
-    width: calc(100% / 10);
-    height: calc(100% / 10);
-}
-
-.square-hard {
-    width: calc(100% / 9);
-    height: calc(100% / 9);
-}
-.square-crazy {
-    width: calc(100% / 7);
-    height: calc(100% / 7);
-}
-
-
 .square {
-    
-    border: 2px solid white;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-}
-.square span {
-    display: none;
-}
-.square.active span {
-    display: block;
+
+    /* TEST */
+    /* width: calc(100% / 7);
+    height: calc(100% / 7); */
 }
 
-.square.square--selected {
-    background-color: #6495ed;
+.square.clicked {
+    background-color: #6495ec;
 }
 
-
+/* FOOTER */
 footer {
     height: 50px;
-    padding: 20px;
+}
+
+/* UTILITY CLASSES */
+/* Lasciare in fondo al file css cosi che possano sovrascrivere le altre classi */
+.hidden {
+    display: none;
 }

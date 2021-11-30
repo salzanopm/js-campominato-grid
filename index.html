@@ -14,24 +14,29 @@
     <div class="app-wrapper">
         <!-- HEADER -->
         <header>
-            <div class="logo-container">
-                <img src="img/logo1.png" alt="logo Boolean">
-                <h1>Campo minato: La griglia</h1>
-            </div>
-            <div class="menu">
-                <span>Difficoltà:</span>
-                <select id="mode-select">
-                    <option value="Easy">Easy</option>
-                    <option value="Hard">Hard</option>
-                    <option value="Crazy">Crazy</option>
-                </select>
-                <button id="play">Play</button>
+            <div class="container">
+                <div class="header-left">
+                    <img class="logo" src="img/logo.png" alt="">
+                    <span>Griglia</span>
+                </div>
+
+                <div class="header-right">
+                    <!-- Level select -->
+                    <label for="select-level">Difficolta:</label>
+                    <select id="select-level">
+                        <option value="1">Easy</option>
+                        <option value="2">Hard</option>
+                        <option value="3">Crazy</option>
+                    </select>
+
+                    <button id="play-button">Play</button>
+                </div>
             </div>
         </header>
 
         <!-- MAIN -->
         <main>
-            <div id="grid" class="game-grid">
+            <div id="grid" class="main-grid hidden">
                 <!-- Single square -->
                 <!-- <div class="square">
                     <span>1</span>
@@ -39,11 +44,6 @@
 
             </div>
         </main>
-        <footer>
-            <div class="made-with-love">
-                <span>Made with &hearts; by<a href="#"> Boolean</a></span>
-            </div>
-        </footer>
     </div>
 
     <script type="text/javascript" src="js/script.js"></script>
